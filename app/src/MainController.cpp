@@ -22,7 +22,6 @@ namespace app {
         void on_mouse_move(engine::platform::MousePosition position) override;
     };
 
-
     void MainPlatformEventObserver::on_mouse_move(engine::platform::MousePosition position) {
         auto gui_controller = engine::core::Controller::get<GUIController>();
         if (!gui_controller->is_enabled()) {
@@ -61,6 +60,19 @@ namespace app {
         model = glm::translate(model, glm::vec3(1.0f, 1.0f, -3.0f));
         model = glm::scale(model, glm::vec3(0.3f));
         shader->set_mat4("model", model);
+        shader->set_vec3("viewPos", graphics->camera()->Position);
+        shader->set_vec3("dirLightDirection", glm::vec3(-0.5f, -1.0f, -0.3f));
+        glm::vec3 dirLightColor(1.0f, 1.0f, 1.0f);
+        if (event_b_done) {
+            dirLightColor = glm::vec3(1.0f, 0.2f, 0.2f);
+        }
+        shader->set_vec3("dirLightColor", dirLightColor);
+        shader->set_vec3("pointLightPosition", glm::vec3(2.0f, 4.0f, 1.0f));
+        glm::vec3 pointLightColor(1.0f, 0.8f, 0.6f);
+        if (event_a_done) {
+            pointLightColor = glm::vec3(0.2f, 0.5f, 1.0f);
+        }
+        shader->set_vec3("pointLightColor", pointLightColor);
 
         temple->draw(shader);
     }
@@ -91,14 +103,35 @@ namespace app {
 
     void MainController::update() {
         update_camera();
+
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+
+        if (!event_started && platform->key(engine::platform::KeyId::KEY_E).is_down()) {
+            event_started = true;
+            event_timer = 0.0f;
+        }
+
+        if (event_started) {
+            event_timer += platform->dt();
+            if (!event_a_done && event_timer >= 2.0f) {
+                event_a_done = true;
+            }
+            if (!event_b_done && event_timer >= 5.0f) {
+                event_b_done = true;
+            }
+        }
     }
 
     void MainController::begin_draw() {
         engine::graphics::OpenGL::clear_buffers();
     }
 
+    //void MainController::draw_skybox() {
+    //}
+
     void MainController::draw() {
         draw_japaneseTemple();
+        //draw_skybox();
     }
 
     void MainController::end_draw() {

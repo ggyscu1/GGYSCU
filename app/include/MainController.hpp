@@ -20,9 +20,16 @@ namespace app {
 
         void begin_draw() override;
 
+        //void draw_skybox();
+
         void draw() override;
 
         void end_draw() override;
+
+        bool event_started = false;
+        bool event_a_done = false;
+        bool event_b_done = false;
+        float event_timer = 0.0f;
 
     public:
         std::string_view name() const override {
