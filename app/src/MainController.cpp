@@ -9,27 +9,32 @@
 #include<MainController.hpp>
 #include<spdlog/spdlog.h>
 
+#include "GUIControler.hpp"
+#include "../../engine/test/app/include/app/GUIController.hpp"
 #include "engine/graphics/GraphicsController.hpp"
 #include "engine/graphics/OpenGL.hpp"
 #include "engine/platform/PlatformController.hpp"
 #include "engine/resources/ResourcesController.hpp"
 
 namespace app {
-    class MainPlatformEcentObserver : public engine::platform::PlatformEventObserver {
+    class MainPlatformEventObserver : public engine::platform::PlatformEventObserver {
     public:
         void on_mouse_move(engine::platform::MousePosition position) override;
     };
 
 
-    void MainPlatformEcentObserver::on_mouse_move(engine::platform::MousePosition position) {
-        auto camera = engine::core::Controller::get<engine::graphics::GraphicsController>()->camera();
-        camera->rotate_camera(position.dx, position.dy);
+    void MainPlatformEventObserver::on_mouse_move(engine::platform::MousePosition position) {
+        auto gui_controller = engine::core::Controller::get<GUIController>();
+        if (!gui_controller->is_enabled()) {
+            auto camera = engine::core::Controller::get<engine::graphics::GraphicsController>()->camera();
+            camera->rotate_camera(position.dx, position.dy);
+        }
     }
 
     void MainController::initialize() {
         spdlog::info("Maincontrolor initialized");
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
-        platform->register_platform_event_observer(std::make_unique<MainPlatformEcentObserver>());
+        platform->register_platform_event_observer(std::make_unique<MainPlatformEventObserver>());
         engine::graphics::OpenGL::enable_depth_testing();
     }
 
@@ -53,7 +58,7 @@ namespace app {
         shader->set_mat4("projection", graphics->projection_matrix());
         shader->set_mat4("view", graphics->camera()->view_matrix());
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, -20.0f));
+        model = glm::translate(model, glm::vec3(1.0f, 1.0f, -3.0f));
         model = glm::scale(model, glm::vec3(0.3f));
         shader->set_mat4("model", model);
 
@@ -61,6 +66,10 @@ namespace app {
     }
 
     void MainController::update_camera() {
+        auto gui_controller = engine::core::Controller::get<GUIController>();
+        if (gui_controller->is_enabled()) {
+            return;
+        }
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
         auto camera = graphics->camera();
