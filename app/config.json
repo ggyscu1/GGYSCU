@@ -1,6 +1,9 @@
 {
   "resources": {
     "models": {
+      "temple": {
+        "path": "Model/Japanese_Temple.obj"
+      }
     }
   },
   "window": {

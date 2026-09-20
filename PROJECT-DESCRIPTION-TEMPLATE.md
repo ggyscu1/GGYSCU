@@ -26,6 +26,7 @@
 [ ] Bloom with the use of HDR
 
 ### Group B:
+
 [ ] Deferred Shading  
 [ ] Point Shadows  
 [ ] SSAO
@@ -36,7 +37,8 @@
 
 ## Models:
 
-[link1]   
+[Dragon by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
+(https://poly.pizza/m/aQ6YU1JK1wC)]   
 [link2]
 
 ## Textures
