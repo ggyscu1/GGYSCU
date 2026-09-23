@@ -1,22 +1,23 @@
-# {NAME-OF-THE-PROJECT}
+# {Hello Window}
 
-{INDEX} - {STUDENT-FULL-NAME}  
-{PROJECT DESCRIPTION}
+{138/2022} - {Bogdan Milovanovic}  
+{Japanski hram}
 
 ## Controls
 
-{BUTTON1} -> {ACTION1}  
-{BUTTON2} -> {ACTION2}  
+{strelice} -> {kretanje po sceni}  
+{mis} -> {rotacija kamere}  
 ...  
-{BUTTONN} -> {ACTIONN}
+{F2} -> {GUI prozor sa koord kamere, kretanje po sceni i mis onemoguceno dok je prozor ukljucen}
 
 ## Features
 
 ### Fundamental:
 
-[ ] Model with lighting
-[ ] Two types of lighting with customizable colors and movement through GUI or ACTIONS
-[ ] {ACTION_X} --- AFTER_M_SECONDS---Triggers---> {EVENT_A} ---> AFTER_N_SECONDS---Triggers---> {EVENT_B}
+[X] Model with lighting
+[X] Two types of lighting with customizable colors and movement through GUI or ACTIONS
+[X] {Press E} --- AFTER_2_SECONDS---Triggers---> {menja boju point svetla} ---> AFTER_5_SECONDS---Triggers---> {menja
+boju direkcionog svetla}
 
 ### Group A:
 
@@ -37,13 +38,12 @@
 
 ## Models:
 
-[Dragon by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
-(https://poly.pizza/m/aQ6YU1JK1wC)]   
+[https://drive.google.com/drive/folders/1C0GWYAiM-eVd5vUkFihx7fB13jO3mcLk]   
 [link2]
 
 ## Textures
 
-[link1]  
+[https://drive.google.com/drive/folders/1C0GWYAiM-eVd5vUkFihx7fB13jO3mcLk]  
 [link2]
 
 {OTHER-RESOURCES}
